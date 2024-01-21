@@ -2,9 +2,6 @@ package dzavorontii.lab.intervals;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Painter {
@@ -21,7 +18,7 @@ public class Painter {
         drawBackground();
     }
 
-    public void drawBackground(){
+    private void drawBackground(){
         gc.strokeRoundRect(margin, margin, width - margin*2, height - margin*2, 10, 10);
     }
 
@@ -53,21 +50,21 @@ public class Painter {
         gc.strokeText(lowerText, margin, y + height/6 + textMargin);
 
         gc.setLineWidth(2.0d);
-// gc.strokeLine(50, 50, 50, 50);   // Y-axis
-
-        // Draw labels
-        //gc.strokeText("X", 355, 255);
-//        gc.strokeText("Y", 45, 45);
     }
 
     public void clear(){
         gc.clearRect(0, 0, width, height);
     }
 
-    public static double maxValue(Interval a, Interval b, Interval result) {
-        return Math.max(Math.max(a.right, a.left), Math.max(
-                Math.max(b.right, b.left),
-                Math.max(result.right, result.left)
-        ));
+    public static float maxValue(Interval... intervals) {
+        float max = 0;
+
+        for (Interval i : intervals){
+            max = Math.max(
+                    Math.max(Math.abs(i.left), max),
+                    Math.max(Math.abs(i.right), max)
+            );
+        }
+        return max;
     }
 }

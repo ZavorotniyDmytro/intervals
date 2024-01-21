@@ -14,6 +14,7 @@ public class IntervalsApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
         stage.setTitle("Intervals");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

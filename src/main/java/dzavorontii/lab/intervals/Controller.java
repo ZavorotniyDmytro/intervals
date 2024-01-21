@@ -40,27 +40,62 @@ public class Controller {
 
             switch (currentOperation.getId()) {
                 case "addBtn" -> {
-                    setResultInterval(Interval.createAddInterval(A, B));
+                    Interval result = Interval.createAddInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "+");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
                 }
                 case "minusBtn" -> {
-                    setResultInterval(Interval.createMinusInterval(A, B));
+                    Interval result = Interval.createMinusInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "-");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
                 }
                 case "multiplyBtn" -> {
-                    setResultInterval(Interval.createMultiplyInterval(A, B));
+                    Interval result = Interval.createMultiplyInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "*");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
                 }
                 case "divBtn" -> {
-                    setResultInterval(Interval.createDivInterval(A, B));
+                    Interval result = Interval.createDivInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "/");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
                 }
                 case "divHypothesisBtn" -> {
-                    setResultInterval(Interval.createDivHypothesisInterval(A, B));
+                    Interval result = Interval.createDivHypothesisInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "/(hypothesis)");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
+                }
+                case "reflectionBtn" -> {
+                    Interval result = Interval.createReflectionInterval(A);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, getResultInterval()), "A", "A⁻");
+                }
+                case "maxBtn" -> {
+                    Interval result = Interval.createMaximumInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "v");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
+                }
+                case "minBtn" -> {
+                    Interval result = Interval.createMinimumInterval(A, B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "ʌ");
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
+                }
+                case "inversionBtn" -> {
+                    Interval result = Interval.createInversionInterval(B);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 0, Painter.maxValue(B, getResultInterval()), "B", "B⁻¹");
                 }
                 default -> {
                     return;
                 }
             }
             Interval result = getResultInterval();
-            painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, B, getResultInterval()), "A", "+");
-            painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(A, B, result), "B", "=");
             painter.drawAxesForInterval(result, canvas.getHeight() / 3 * 2, Painter.maxValue(A, B, result), "Result", "");
 
             resultField.setText("[" + result.left + ", " + result.right + "]");

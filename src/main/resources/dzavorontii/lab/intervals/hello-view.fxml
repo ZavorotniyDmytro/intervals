@@ -80,19 +80,19 @@
                <font>
                   <Font name="Century Gothic" size="12.0" />
                </font></RadioButton>
-            <RadioButton layoutX="25.0" layoutY="180.0" mnemonicParsing="false" text="Відображення А" toggleGroup="$operation">
+            <RadioButton fx:id="reflectionBtn" layoutX="25.0" layoutY="180.0" mnemonicParsing="false" text="Відображення А" toggleGroup="$operation">
                <font>
                   <Font name="Century Gothic" size="12.0" />
                </font></RadioButton>
-            <RadioButton layoutX="25.0" layoutY="215.0" mnemonicParsing="false" text="Максимум" toggleGroup="$operation">
-               <font>
-                  <Font name="Century Gothic" size="11.0" />
-               </font></RadioButton>
-            <RadioButton layoutX="195.0" layoutY="215.0" mnemonicParsing="false" text="Мінімум" toggleGroup="$operation">
+            <RadioButton fx:id="maxBtn" layoutX="25.0" layoutY="215.0" mnemonicParsing="false" text="Максимум" toggleGroup="$operation">
                <font>
                   <Font name="Century Gothic" size="12.0" />
                </font></RadioButton>
-            <RadioButton layoutX="195.0" layoutY="180.0" mnemonicParsing="false" text="Інверсія В" toggleGroup="$operation">
+            <RadioButton fx:id="MinBtn" layoutX="195.0" layoutY="215.0" mnemonicParsing="false" text="Мінімум" toggleGroup="$operation">
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="inversionBtn" layoutX="195.0" layoutY="180.0" mnemonicParsing="false" text="Інверсія В" toggleGroup="$operation">
                <font>
                   <Font name="Century Gothic" size="12.0" />
                </font></RadioButton>
