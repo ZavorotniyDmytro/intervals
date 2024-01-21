@@ -10,8 +10,8 @@ public class Interval {
     }
 
     public Interval(float left, float right) {
-        this.left = left;
-        this.right = right;
+        this.left = Math.min(left, right);
+        this.right = Math.max(left, right);
     }
 
 
