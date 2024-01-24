@@ -51,7 +51,7 @@ public class Interval {
     }
 
     public static Interval createReflectionInterval(Interval A) {
-        return new Interval(A.left * -1, A.right * -1);
+        return new Interval(A.right * -1, A.left * -1);
     }
 
     public static Interval createMaximumInterval(Interval A, Interval B) {
