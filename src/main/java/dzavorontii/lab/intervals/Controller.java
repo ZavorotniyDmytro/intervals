@@ -119,10 +119,8 @@ public class Controller {
                         Parent root  = loader.load();
                         Dialog<Void> dialog = new Dialog<>();
                         dialog.setTitle("MultiplyIntervals");
+                        dialog.setHeight(300);
                         dialog.getDialogPane().setContent(root);
-                        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-                        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
-                        closeButton.setVisible(false);
 
                         dialog.showAndWait();
 
