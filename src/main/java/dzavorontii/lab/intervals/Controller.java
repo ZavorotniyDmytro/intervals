@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class Controller {
     @FXML private TextField addANumber;
@@ -151,7 +152,10 @@ public class Controller {
             rightB.setText(String.valueOf(resultInterval.right));
         });
 
-        close.setOnAction(event -> { });
+        close.setOnAction(event -> {
+            Stage stage = (Stage) close.getScene().getWindow();
+            stage.close();
+        });
     }
 
     public void setResultInterval(Interval i) {
