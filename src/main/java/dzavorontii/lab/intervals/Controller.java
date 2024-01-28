@@ -1,15 +1,15 @@
 package dzavorontii.lab.intervals;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 
 public class Controller {
-    @FXML private ResourceBundle resources;
-    @FXML private URL location;
     @FXML private TextField addANumber;
     @FXML private Label resultField;
     @FXML private Button calculate;
@@ -31,8 +31,6 @@ public class Controller {
         Painter painter = new Painter(canvas);
         calculate.setOnAction(event -> {
             painter.clear();
-
-
             RadioButton currentOperation = (RadioButton) operation.getSelectedToggle();
             if (currentOperation.getId() == null) return;
             Interval A = new Interval(Float.parseFloat(leftA.getText()), Float.parseFloat(rightA.getText()));
@@ -90,6 +88,49 @@ public class Controller {
                     Interval result = Interval.createInversionInterval(B);
                     setResultInterval(result);
                     painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 0, Painter.maxValue(B, getResultInterval()), "B", "B⁻¹");
+                }
+                case "addKtoA" -> {
+                    float k = Float.parseFloat(addANumber.getText());
+                    Interval result = Interval.createAddKForAInterval(A, k);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, getResultInterval()), "A", "+k");
+                }
+                case "minusKfromB" -> {
+                    float k = Float.parseFloat(munisBNumber.getText());
+                    Interval result = Interval.createMinusKFromBInterval(B, k);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(B, result), "B", "-k");
+                }
+                case "multAtoK" -> {
+                    float k = Float.parseFloat(multiANumber.getText());
+                    Interval result = Interval.createMultiplyKInterval(A, k);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(A, canvas.getHeight() / 3 * 0, Painter.maxValue(A, getResultInterval()), "A", "*k");
+                }
+                case "divBtoK" -> {
+                    float k = Float.parseFloat(divBNumber.getText());
+                    Interval result = Interval.createDivKInterval(B, k);
+                    setResultInterval(result);
+                    painter.drawAxesForInterval(B, canvas.getHeight() / 3 * 1, Painter.maxValue(B, result), "B", "/k");
+                }
+                case "multiply" -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("multiply-intervals.fxml"));
+                    try {
+                        Parent root  = loader.load();
+                        Dialog<Void> dialog = new Dialog<>();
+                        dialog.setTitle("MultiplyIntervals");
+                        dialog.getDialogPane().setContent(root);
+                        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+                        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+                        closeButton.setVisible(false);
+
+                        dialog.showAndWait();
+
+                        MultiplyController mc = loader.getController();
+                        setResultInterval(Interval.createMultiplyInterval(mc.multiplyIntervals));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 default -> {
                     return;

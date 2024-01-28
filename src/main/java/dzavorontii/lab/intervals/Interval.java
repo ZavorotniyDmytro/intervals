@@ -1,5 +1,7 @@
 package dzavorontii.lab.intervals;
 
+import java.util.List;
+
 public class Interval {
     float left;
     float right;
@@ -18,10 +20,10 @@ public class Interval {
 
     @Override
     public String toString() {
-        return "Interval{" +
+        return "[" +
                 "left=" + left +
                 ", right=" + right +
-                '}';
+                ']';
     }
 
     public static Interval createAddInterval(Interval A, Interval B){
@@ -63,6 +65,30 @@ public class Interval {
     }
 
     public static Interval createInversionInterval(Interval B) {
-        return new Interval(1 / B.left, 1 / B.right);
+        return new Interval(1 / B.right, 1 / B.left);
+    }
+
+    public static Interval createAddKForAInterval(Interval A, float k){
+        return new Interval(A.left + k, A.right + k);
+    }
+
+    public static Interval createMinusKFromBInterval(Interval B, float k){
+        return new Interval(B.left - k, B.right - k);
+    }
+
+    public static Interval createMultiplyKInterval(Interval B, float k){
+        return new Interval(B.left * k, B.right * k);
+    }
+
+    public static Interval createDivKInterval(Interval B, float k){
+        return new Interval(B.left / k, B.right / k);
+    }
+
+    public static Interval createMultiplyInterval(List<Interval> intervals){
+        Interval result = new Interval(1, 1);
+        for (Interval interval : intervals){
+            result = createMultiplyInterval(result, interval);
+        }
+        return result;
     }
 }
