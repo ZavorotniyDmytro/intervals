@@ -34,8 +34,8 @@ public class Controller {
             painter.clear();
             RadioButton currentOperation = (RadioButton) operation.getSelectedToggle();
             if (currentOperation.getId() == null) return;
-            Interval A = new Interval(Float.parseFloat(leftA.getText()), Float.parseFloat(rightA.getText()));
-            Interval B = new Interval(Float.parseFloat(leftB.getText()), Float.parseFloat(rightB.getText()));
+            Interval A = new Interval(IntervalUtils.strToFloat(leftA.getText()), IntervalUtils.strToFloat(rightA.getText()));
+            Interval B = new Interval(IntervalUtils.strToFloat(leftB.getText()), IntervalUtils.strToFloat(rightB.getText()));
 
             switch (currentOperation.getId()) {
                 case "addBtn" -> {

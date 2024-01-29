@@ -16,8 +16,6 @@ public class Interval {
         this.right = Math.max(left, right);
     }
 
-
-
     @Override
     public String toString() {
         return "[" +
